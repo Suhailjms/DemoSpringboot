@@ -1,6 +1,7 @@
 package com.suhail.springdemo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -11,7 +12,9 @@ import java.util.List;
 public class StudentController {
     private StudentService service; //tightly coupled becoz relay on the instance of stu service our spring continer not manageing the life cycle becox of new keyword
 //    @Autowired //to inject service in the controller // if we use contructor we can eliminate the use of autowired
-    public StudentController(StudentService service) {
+    public StudentController(
+            @Qualifier("db") StudentService service) {
+           // this qualifier specify the service that needs to be injected in the controller
         this.service = service;
     }
 
@@ -33,7 +36,6 @@ public class StudentController {
     }
     @GetMapping
     public List<Student> findAllStudents(){
-
         return service.findAllStudents();
     }
 }

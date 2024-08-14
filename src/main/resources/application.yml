@@ -6,3 +6,20 @@
 #
 
 #shift+f6 for rename
+#here we will start providing prop or info in order to spring data jpa takes and use the property to connect db
+#default port for pogresql db
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/student_db
+    username : postgres
+    password : root@123
+    driver-class-name : org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    database-platform :  org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

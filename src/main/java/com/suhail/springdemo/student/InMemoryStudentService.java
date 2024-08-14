@@ -4,7 +4,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service // to tell the spring that this is bean
+@Service("in")//the values as bean. spring will create bean for inme..service and it will call at "im"
+// to tell the spring that this is bean
 public class InMemoryStudentService implements StudentService {
 
     private final InMemoryStudentDao dao;
