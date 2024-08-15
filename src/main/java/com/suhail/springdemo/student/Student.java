@@ -1,26 +1,57 @@
 package com.suhail.springdemo.student;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.time.LocalDate;
 import java.time.Period;
 
 @Entity
-@Table(name="student")
+@Table(name = "student")
 public class Student {
 
     @Id
     @GeneratedValue
     private Integer id;
+
     private String firstname;
+
     private String lastname;
-    private LocalDate dob;
+
+    private LocalDate dateOfBirth;
 
     @Column(unique = true)
     private String email;
 
-    @Transient   // is to prevent adding the field in the table
+    @Transient // is to prevent adding the field in the table
     private int age;
+
+    public Student(
+            String firstname,
+            String lastname,
+            LocalDate dateOfBirth,
+            String email,
+            int age
+    ) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dateOfBirth = dateOfBirth;
+        this.email = email;
+        this.age = age;
+    }
+
+    public Student() {}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -38,46 +69,27 @@ public class Student {
         this.lastname = lastname;
     }
 
-    public LocalDate getDob() {
-        return dob;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Student(String firstname, String lastname, LocalDate dob, String email, int age) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.dob = dob;
-        this.email = email;
-        this.age = age;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public Student() {
-    }
-
     public int getAge() {
-
-        return Period.between(dob,LocalDate.now()).getYears();
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
     public void setAge(int age) {
         this.age = age;
-    }
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 }
