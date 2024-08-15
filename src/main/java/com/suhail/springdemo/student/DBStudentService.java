@@ -1,5 +1,7 @@
 package com.suhail.springdemo.student;
 import java.util.List;
+
+import jakarta.transaction.Transactional;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,7 @@ public class DBStudentService implements StudentService {
         return repository.save(s);
     }
 
+    @Transactional
     @Override
     public void delete(String email) {
         repository.deleteByEmail(email);
